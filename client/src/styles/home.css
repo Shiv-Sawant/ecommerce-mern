@@ -1,0 +1,47 @@
+.home-container {
+    height: 900px;
+    background-image: linear-gradient(to right, #635dc0, #3027ae);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 80px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 65.8%, 0% 100%);
+}
+
+.home-container h1{
+    font-weight: bold;
+    word-spacing: 8px;
+    color: white;
+
+}
+
+.home-container h3{
+    font-size: 70px;
+    font-weight: 100;
+    color: white;
+
+}
+
+.home-container a{
+    width: 150px;
+    height: 70px;
+    background-color: white;
+    cursor: pointer;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 300ms ;
+}
+
+.home-container a:hover{
+    background-color: #635dc0;
+    color: white;
+    border: 1px solid black;
+}
+
+.home-container button h4 {
+    font-size: 17px;
+    letter-spacing: 2px;
+}
