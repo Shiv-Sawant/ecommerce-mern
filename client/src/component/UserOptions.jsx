@@ -17,11 +17,15 @@ const UserOptions = ({ user }) => {
   const navigate = useNavigate()
   const alerts = useAlert()
   const dispatch = useDispatch()
+  const data = useSelector((state) => {
+    return state.app
+  })
+
 
   const options = [
     { icon: <ListAltIcon />, name: "Orders", func: orderFunc },
     { icon: <PersonIcon />, name: "Profile", func: profileFunc },
-    { icon: <BsFillCartFill />, name: "Cart", func: cartFunc },
+    { icon: <BsFillCartFill style={{ color: data.cart.length > 0 ? 'tomato' : "" }} />, name: `Cart ${data.cart.length}`, func: cartFunc },
     { icon: <ExitToAppIcon />, name: "Logout", func: logoutFunc },
   ]
 

@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, current, isAsyncThunkAction, } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
@@ -129,6 +129,57 @@ export const userUpdate = createAsyncThunk('userUpdate', async (args, { rejectWi
     }
 })
 
+// cart items
+export const cartItems = createAsyncThunk('cartItems', async (args, { rejectWithValue }) => {
+    try {
+
+        console.log(args, "args")
+        const res = await axios.get(`http://localhost:3500/api/v1/product/${args.product}`)
+
+        let data = {
+            product: args.product,
+            name: res.data.product.name,
+            price: res.data.product.price,
+            image: res.data.product.images[0].url,
+            stock: res.data.product.Stock,
+            quantity: args.item
+        }
+        return data
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
+
+export const saveShipping = createAsyncThunk('saveShipping', async (args, { rejectWithValue }) => {
+    try {
+        console.log(args, "argsargs")
+        return args
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
+
+export const removeCartItem = createAsyncThunk('removeCartItem', async (args, { rejectWithValue }) => {
+    try {
+        return args
+    } catch (error) {
+        rejectWithValue(error)
+    }
+})
+
+
+let intialCartState = {
+    cartItems: localStorage.getItem("cartItems")
+        ? JSON.parse(localStorage.getItem("cartItems"))
+        : [],
+
+}
+
+let intialShippingState = {
+    shippingInfo: localStorage.getItem("shippingInfo")
+        ? JSON.parse(localStorage.getItem("shippingInfo"))
+        : []
+}
 
 export const productSlice = createSlice({
     name: 'productSlice',
@@ -139,7 +190,9 @@ export const productSlice = createSlice({
         error: null,
         user: [],
         isAuthenticate: false,
-        userInfo: []
+        userInfo: [],
+        cart: intialCartState.cartItems,
+        shipping: intialShippingState.shippingInfo
     },
     extraReducers: {
         [getProducts.pending]: (state) => {
@@ -232,7 +285,68 @@ export const productSlice = createSlice({
             state.loading = false
             state.error = action.payload
             state.isAuthenticate = false
-        }
+        },
+        [cartItems.pending]: (state, action) => {
+            state.loading = true
+        },
+        [cartItems.fulfilled]: (state, action) => {
+            state.loading = false
+
+            console.log('into the action')
+
+            const item = action.payload
+            let carty = current(state)
+
+            let isItemExist = carty.cart.find(
+                (i) => i.product === item.product
+            )
+            console.log(item, "itemitem")
+
+            if (isItemExist !== undefined) {
+                state.cart = state.cart.map((i) =>
+                    i.product === item.product ? item : i
+                )
+
+            } else {
+                state.cart = [...state?.cart || [], item]
+            }
+            localStorage.setItem('cartItems', JSON.stringify(state.cart))
+            console.log('exit reducer')
+        },
+        [cartItems.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [removeCartItem.pending]: (state) => {
+            state.loading = true
+            state.cart = state.cart
+        },
+        [removeCartItem.fulfilled]: (state, action) => {
+            state.loading = false
+            state.cart = state.cart.filter((i) => i.product !== action.payload)
+            localStorage.setItem('cartItems', JSON.stringify(state.cart))
+            // state.userInfo = action.payload
+        },
+        [removeCartItem.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [saveShipping.pending]: (state) => {
+            state.loading = true
+            state.shipping = state.shipping
+        },
+        [saveShipping.fulfilled]: (state, action) => {
+            state.loading = false
+            state.shipping = action.payload
+            state.error = null
+            localStorage.setItem('shippingInfo', JSON.stringify(state.shipping))
+            // state.userInfo = action.payload
+        },
+        [saveShipping.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+
     }
 })
 

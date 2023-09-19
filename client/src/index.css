@@ -511,9 +511,9 @@ Carousel {
 
 .speeddialicon {
   border-radius: 100px;
-  height: 95px;
-  width: 95px;
-  border: 2px solid white;
+  height: 65px;
+  width: 65px;
+  border: 1px solid black;
 }
 
 .account-container {
@@ -631,10 +631,12 @@ Carousel {
 .cart-component {
   /* background-color: red; */
   max-width: 1920px;
-  height: 800px;
+  min-height: 800px;
+  max-height: 800px;
   box-sizing: border-box;
   padding: 8rem 9rem;
   display: flex;
+  overflow: scroll;
   flex-direction: column;
 }
 
@@ -643,7 +645,7 @@ Carousel {
   padding: 0 1rem;
   display: flex;
   background-color: tomato;
-  height: 40px;
+  min-height: 40px;
   color: white;
   align-items: center;
   justify-content: space-between;
@@ -659,6 +661,7 @@ Carousel {
   box-sizing: border-box;
   padding: 1rem;
   justify-content: space-between;
+  /* overflow: scroll; */
 }
 
 .cart-body-right {
@@ -733,12 +736,12 @@ Carousel {
   font-weight: 500;
 }
 
-.checkout-container div:first-child{
+.checkout-container div:first-child {
   padding-top: 2rem;
   border-top: 2px solid rgb(255, 72, 40);
 }
 
-.checkout-button button{
+.checkout-button button {
   width: 250px;
   height: 45px;
   border-radius: 30px;
@@ -748,4 +751,116 @@ Carousel {
   color: white;
   font-size: 15px;
   cursor: pointer;
+}
+
+.empty-cart {
+  /* background-color: red; */
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.empty-cart h1 {
+  font-size: 3rem;
+  font-weight: 400;
+  color: rgb(43, 43, 43);
+}
+
+.empty-cart h3 {
+  color: rgb(43, 43, 43);
+  font-weight: bold;
+  border-bottom: 1px solid tomato;
+}
+
+.emptycarticon {
+  font-size: 10rem;
+  font-weight: 300;
+  color: rgb(43, 43, 43);
+  margin-bottom: -35px;
+}
+
+/* shipping section */
+.shippingcontainer {
+  /* background-color: red; */
+  min-height: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 2rem;
+  gap: 4rem;
+}
+
+.shippingcontainer h1 {
+  color: rgb(34, 34, 34);
+  border-bottom: 1px solid black;
+  padding-bottom: 15px;
+  text-align: center;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+  font-size: 1.3rem;
+  font-weight: 400;
+  width: 250px;
+}
+
+.shippingform {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.shippingform input,
+.shippingform select {
+  min-height: 55px;
+  max-height: 55px;
+  min-width: 380px;
+  max-width: 380px;
+  padding-left: 2.5rem;
+  box-sizing: border-box;
+  outline: none;
+  padding: 1rem 3rem;
+}
+
+.shippingform input::placeholder,
+.shippingform select::placeholder {
+  font-size: 1.2rem;
+  color: gray;
+}
+
+.shippingform svg {
+  position: absolute;
+  transform: translateY(1rem) translateX(1rem);
+  color: gray;
+  /* transform: translateY(1rem); */
+}
+
+.shippingform button {
+  min-width: 380px;
+  background-color: tomato;
+  border: none;
+  outline: none;
+  color: white;
+  height: 55px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* stepper styling */
+.MuiStepConnector-line {
+  display: none !important;
+}
+
+.MuiStepConnector-root {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.349);
+}
+
+.MuiStepConnector-active,
+.MuiStepConnector-completed {
+  background-color: tomato;
 }

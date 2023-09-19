@@ -50,17 +50,16 @@ const Login = () => {
         }
     }
 
+    const redirect = window.location.search ? window.location.search.split("=")[1] : "/account"
+
+    // console.log(redirect, "redirect")
+
     useEffect(() => {
         if (data?.isAuthenticate) {
-            navigate('/account')
+            navigate(`/${redirect}`)
         }
 
-        // if (data?.error?.length !== 0 || data?.error !== null) {
-        //     alerts.error(data?.error?.message)
-        // }
-
-
-    }, [dispatch, data?.error, alerts, data?.isAuthenticate, data, navigate])
+    }, [dispatch, data?.error, alerts, data?.isAuthenticate, data, navigate, redirect])
 
     return (
         <div className='login-container'>

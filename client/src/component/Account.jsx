@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { userAccountInfo } from '../featrues/productSlice'
 import { useAlert } from 'react-alert'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Loader from './Loader'
 
 
 const Account = () => {
+  const navigate = useNavigate()
   const alerts = useAlert()
   const dispatch = useDispatch()
   const data = useSelector((state) => {
@@ -16,6 +17,10 @@ const Account = () => {
   console.log(data, "datadata")
 
   useEffect(() => {
+    if(data.isAuthenticate === false) {
+      navigate('/login')
+    }
+
     dispatch(userAccountInfo())
   }, [dispatch])
 

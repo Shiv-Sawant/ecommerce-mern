@@ -36,7 +36,7 @@ exports.getAllProducts = catchAsyncError(async (req, res, next) => {
 //get product details
 exports.getProductDetail = catchAsyncError(async (req, res, next) => {
     const product = await Product.findById(req.params.id)
-
+    console.log('into product detail route')
     if (!product) {
         return next(new ErrorHandler('Product Id Incorrect', 404))
     }

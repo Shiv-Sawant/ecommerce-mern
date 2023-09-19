@@ -1,22 +1,50 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { productDetail } from '../featrues/productSlice'
+import { cartItems, getProducts, productDetail } from '../featrues/productSlice'
 import { useParams } from 'react-router-dom'
 import ReactStars from 'react-rating-stars-component'
 import Carousel from 'react-material-ui-carousel'
 import ReviewCard from './ReviewCard'
 import Loader from './Loader'
+import { useAlert } from 'react-alert'
+import axios from 'axios'
 
 const ProductDetail = () => {
+  const alerts = useAlert()
   const params = useParams()
   const dispatch = useDispatch()
+  const [item, setItem] = useState(1)
+  const [isItem, setIsItem] = useState(false)
 
-  const { productDetails, loading } = useSelector((state) => {
+  const productDetails = useSelector((state) => {
     return state.app
   })
 
-  console.log(productDetails, "loader")
-  console.log(loading, "loader")
+  console.log(productDetails, "productDetails")
+
+
+  const handleIncrease = () => {
+    if (Number(productDetails?.productDetails?.data?.product?.Stock) !== item) {
+      setItem(item + 1)
+    }
+  }
+
+  const handleDecrease = () => {
+    if (item !== 0) {
+      setItem(item - 1)
+    }
+  }
+
+  const handleCart = async () => {
+    alerts.success('Added Item Into Cart')
+
+    dispatch(cartItems({
+      product: params.id,
+      item
+    }))
+
+  }
+
 
   useEffect(() => {
     dispatch(productDetail(params.id))
@@ -25,7 +53,7 @@ const ProductDetail = () => {
   return (
     <>
       {
-        loading ?
+        productDetails?.loading ?
           <Loader />
           :
           <>
@@ -38,8 +66,8 @@ const ProductDetail = () => {
                 // prev={() => { }}
                 >
                   {
-                    productDetails?.data?.product?.images &&
-                    productDetails?.data?.product?.images.map((item, i) => {
+                    productDetails?.productDetails?.data?.product?.images &&
+                    productDetails?.productDetails?.data?.product?.images.map((item, i) => {
                       // console.log(item,"itemitem")
                       // console.log(i,"itemitem")
                       return (
@@ -57,7 +85,7 @@ const ProductDetail = () => {
                 <div className='product-details'>
                   <div>
                     <h1>subscribe</h1>
-                    Product # {productDetails?.data?.product?._id}
+                    Product # {productDetails?.productDetails?.data?.product?._id}
                   </div>
 
                   <div className='product-detail-stars'>
@@ -74,10 +102,10 @@ const ProductDetail = () => {
                     </h2>
                     <br />
                     <div>
-                      <button className='input-button'>-</button>
-                      <input value="1" disabled={true} type="number" />
-                      <button className='input-button second'>+</button>
-                      <button>
+                      <button className='input-button' onClick={handleDecrease}>-</button>
+                      <input value={item} disabled={true} type="number" readOnly />
+                      <button className='input-button second' onClick={handleIncrease}>+</button>
+                      <button onClick={handleCart}>
                         Add to Cart
                       </button>
                     </div>
@@ -86,9 +114,9 @@ const ProductDetail = () => {
 
                   <div>
                     <h5>
-                      Status: <span style={{ color: productDetails?.data?.product.Stock > 0 ? "green" : "red" }}>
+                      Status: <span style={{ color: productDetails?.productDetails?.data?.product.Stock > 0 ? "green" : "red" }}>
                         {
-                          productDetails?.data?.product.Stock > 0 ?
+                          productDetails?.productDetails?.data?.product.Stock > 0 ?
                             "InStock"
                             :
                             "OutOfStock"

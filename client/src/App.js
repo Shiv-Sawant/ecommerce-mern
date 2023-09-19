@@ -10,14 +10,13 @@ import Products from './component/Products';
 import Login from './component/Login';
 import Account from './component/Account';
 import UpdateProfile from './component/UpdateProfile';
-
+import Shipping from './component/Shipping'
 import { store } from './store'
 import { userAccountInfo } from './featrues/productSlice';
 import { useSelector } from 'react-redux';
 import Cart from './component/Cart';
 
 function App() {
-  const navigate = useNavigate()
   var user = useSelector((state) => state.app)
 
   console.log(user, "app user")
@@ -51,6 +50,7 @@ function App() {
         <Route path='/products' element={<Products />} />
         <Route path='/login' element={<Login />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/shipping' element={<Shipping />} />
       </Routes>
       <Footer />
       {/* </Router> */}

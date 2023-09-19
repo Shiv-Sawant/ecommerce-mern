@@ -4,7 +4,6 @@ import ReactStars from 'react-rating-stars-component'
 
 
 const ReviewCard = ({ review }) => {
-  console.log(review, "review")
   return (
     <div className='review-card-container'>
       <div className='review-profile'>
