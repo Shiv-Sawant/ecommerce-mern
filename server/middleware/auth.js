@@ -5,13 +5,10 @@ const User = require('../modal/UserModal')
 
 exports.isAuthenticate = catchAsyncError(async (req, res, next) => {
 
-    // const tokens = req.cookies.jwttokens
 
     try {
         const token = req.cookies.getCookie
         console.log(token, "from auth token")
-        console.log(new Date(Date.now()), "from auth token")
-
 
         if (!token) {
             return next(new ErrorHandler('Please login to access this resouce', 401))

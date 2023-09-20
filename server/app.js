@@ -29,11 +29,13 @@ app.options("*", cors());
 const product = require('./router/ProductRoute')
 const user = require('./router/UserRoute')
 const order = require('./router/OrderRoute')
+const payment = require('./router/PaymentRoute')
 
 
 app.use('/api/v1', product)
 app.use('/api/v1', user)
 app.use('/api/v1', order)
+app.use('/api/v1', payment)
 
 
 //routes

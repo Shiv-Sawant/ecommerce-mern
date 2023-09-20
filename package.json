@@ -25,6 +25,7 @@
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.3.2",
     "nodemailer": "^6.9.4",
+    "stripe": "^13.6.0",
     "universal-cookie": "^6.1.0",
     "validator": "^13.11.0"
   }

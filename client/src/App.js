@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
 import Header from './component/Header';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import webfont from 'webfontloader'
 import Footer from './component/Footer';
 import Home from './component/Home';
@@ -15,12 +15,26 @@ import { store } from './store'
 import { userAccountInfo } from './featrues/productSlice';
 import { useSelector } from 'react-redux';
 import Cart from './component/Cart';
+import ConfirmOrder from './component/ConfirmOrder';
+import ProceedPayment from './component/ProceedPayment';
+import axios from 'axios';
+
 
 function App() {
   var user = useSelector((state) => state.app)
+  const [StripeKey, setStripeKey] = useState()
 
-  console.log(user, "app user")
-  console.log(user?.isAuthenticate === "false", "app user")
+  const getStripeKey = async () => {
+    const data = await axios.get('http://localhost:3500/api/v1/sendApiKey',
+      { withCredentials: true },
+      {
+        headers:
+          { "Content-Type": "application/json" }
+      }
+    )
+    setStripeKey(data.data.stripapikey)
+    console.log(data, "datadata")
+  }
 
   useEffect(() => {
     webfont.load({
@@ -29,11 +43,8 @@ function App() {
       }
     })
 
+    getStripeKey()
     store.dispatch(userAccountInfo())
-
-    // if (user?.isAuthenticate === false) {
-    //   navigate('/login')
-    // }
   }, [])
 
   return (
@@ -51,6 +62,9 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/shipping' element={<Shipping />} />
+        <Route path='/order/confirm' element={<ConfirmOrder />} />
+        <Route path='/process/payment' element={<ProceedPayment />} />
+
       </Routes>
       <Footer />
       {/* </Router> */}
