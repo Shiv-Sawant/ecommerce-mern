@@ -1,6 +1,5 @@
 import React from 'react'
 import CheckoutSteps from './CheckoutSteps'
-import img from '../assets/1.jpg'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useAlert } from 'react-alert'

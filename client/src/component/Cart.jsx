@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import img from '../assets/top1.jpg'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { cartItems, removeCartItem } from '../featrues/productSlice'
 import { Link, useNavigate } from 'react-router-dom'

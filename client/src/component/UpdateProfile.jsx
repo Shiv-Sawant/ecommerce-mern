@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { userLogin, userRegister, userUpdate } from '../featrues/productSlice'
-import { BiSolidUserCircle } from 'react-icons/bi'
+import {  userUpdate } from '../featrues/productSlice'
 
 const UpdateProfile = () => {
   let alerts = useAlert()

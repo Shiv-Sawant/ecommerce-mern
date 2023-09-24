@@ -7,6 +7,7 @@ const Product = require('../modal/ProductModal')
 exports.createOrder = async (req, res, next) => {
     const { shippingInfo, orderItems, paymentInfo, itemsPrice, taxPrice, shippingPrice, totalPrice } = req.body
 
+    console.log(req.body, "req.bodyreq.bodyreq.body")
     const order = await Order.create({
         shippingInfo,
         orderItems,
@@ -95,9 +96,11 @@ exports.updateOrderStatus = async (req, res, next) => {
         return next(new ErrorHandler('you have already delivered this order', 404))
     }
 
-    order.orderItems.forEach(async (order) => {
-        await updateOrder(order.product, order.quantity)
-    })
+    if (order.orderStatus === 'Shipped') {
+        order.orderItems.forEach(async (order) => {
+            await updateOrder(order.product, order.quantity,next)
+        })
+    }
 
     order.orderStatus = req.body.status
 
@@ -113,7 +116,7 @@ exports.updateOrderStatus = async (req, res, next) => {
     })
 }
 
-async function updateOrder(id, quantity) {
+async function updateOrder(id, quantity,next) {
     const product = await Product.findById(id)
 
     if (!product) {

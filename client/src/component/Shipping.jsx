@@ -4,11 +4,10 @@ import HomeIcon from "@material-ui/icons/Home";
 import LocationCityIcon from "@material-ui/icons/LocationCity";
 import PublicIcon from "@material-ui/icons/Public";
 import PhoneIcon from "@material-ui/icons/Phone";
-import TransferWithinAStationIcon from "@material-ui/icons/TransferWithinAStation";
 import { Country, State } from "country-state-city";
 import { useSelector, useDispatch } from "react-redux";
 import CheckoutSteps from './CheckoutSteps'
-import { saveShipping } from '../featrues/productSlice';
+import { clearErrors, saveShipping } from '../featrues/productSlice';
 import { useAlert } from 'react-alert'
 import { useNavigate } from 'react-router-dom'
 
@@ -31,7 +30,7 @@ const Shipping = () => {
   const handleShipping = (e) => {
     e.preventDefault()
 
-    if (PhoneNumber < 10 || PhoneNumber > 10) {
+    if (PhoneNumber.length < 10 || PhoneNumber.length > 10) {
       alerts.error('Please Check The Phone Number')
     }
 
@@ -48,8 +47,8 @@ const Shipping = () => {
   }
 
   useEffect(() => {
-
-  }, [PhoneNumber, alerts])
+    dispatch(clearErrors())
+  }, [dispatch, PhoneNumber, alerts])
 
   return (
     <>

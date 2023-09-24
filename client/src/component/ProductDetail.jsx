@@ -1,27 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { cartItems, getProducts, productDetail } from '../featrues/productSlice'
+import { cartItems, clearErrors, createProductReview, getProductReview, productDetail } from '../featrues/productSlice'
 import { useParams } from 'react-router-dom'
-import ReactStars from 'react-rating-stars-component'
 import Carousel from 'react-material-ui-carousel'
 import ReviewCard from './ReviewCard'
 import Loader from './Loader'
 import { useAlert } from 'react-alert'
-import axios from 'axios'
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+} from "@material-ui/core";
+import { Rating } from "@material-ui/lab";
 
 const ProductDetail = () => {
   const alerts = useAlert()
   const params = useParams()
   const dispatch = useDispatch()
   const [item, setItem] = useState(1)
-  const [isItem, setIsItem] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [Reviews, setReview] = useState([])
+  const [Ratings, setRating] = useState([])
 
   const productDetails = useSelector((state) => {
     return state.app
   })
 
-  console.log(productDetails, "productDetails")
-
+  console.log(productDetails, "productDetailsproductDetails")
 
   const handleIncrease = () => {
     if (Number(productDetails?.productDetails?.data?.product?.Stock) !== item) {
@@ -43,12 +50,45 @@ const ProductDetail = () => {
       item
     }))
 
+
   }
 
+  const handleSubmitOpen = () => {
+    setIsOpen(!isOpen)
+  }
+
+  const handleReviewSubmit = () => {
+    dispatch(createProductReview({
+      rating: Ratings,
+      comment: Reviews,
+      productId: params.id
+    }))
+
+    setIsOpen(!isOpen)
+  }
+
+  const options = {
+    size: "large",
+    value: productDetails?.productDetails?.data?.product?.ratings,
+    readOnly: true,
+    precision: 0.5,
+  };
 
   useEffect(() => {
+    if (productDetails?.error) {
+      alerts.error(productDetails?.error?.message)
+      dispatch(clearErrors())
+    }
+
     dispatch(productDetail(params.id))
-  }, [dispatch])
+
+    dispatch(getProductReview(params.id))
+
+    if (productDetails?.newReview?.data?.success) {
+      alerts.success('Review Send Successfully  ')
+    }
+
+  }, [dispatch, productDetails?.error,alerts,productDetails?.newReview?.data?.success,params.id])
 
   return (
     <>
@@ -77,28 +117,26 @@ const ProductDetail = () => {
                       )
 
                     })
-                    // items.map( (item, i) => <Item key={i} item={item} /> )
                   }
                 </Carousel>
                 {/* </div> */}
 
                 <div className='product-details'>
                   <div>
-                    <h1>subscribe</h1>
+                    <h1>{productDetails?.productDetails?.data?.product?.name}</h1>
                     Product # {productDetails?.productDetails?.data?.product?._id}
                   </div>
 
                   <div className='product-detail-stars'>
-                    <ReactStars
-                    />
+                    <Rating {...options} />
                     <span>
-                      ({productDetails?.data?.product?.numOfReview} Reviews)
+                      ({productDetails?.productDetails?.data?.product?.numOfReview} Reviews)
                     </span>
                   </div>
 
                   <div>
                     <h2>
-                      ₹10000
+                      ₹{productDetails?.productDetails?.data?.product?.price}
                     </h2>
                     <br />
                     <div>
@@ -133,7 +171,7 @@ const ProductDetail = () => {
                     <br />
 
                     <div>
-                      <button style={{ marginTop: "20px" }}>
+                      <button onClick={handleSubmitOpen} style={{ marginTop: "20px" }}>
                         Submit Review
                       </button>
                     </div>
@@ -151,12 +189,49 @@ const ProductDetail = () => {
                 </h1>
               </div>
 
+              {
+                isOpen && (
+                  <>
+                    <Dialog
+                      aria-labelledby="simple-dialog-title"
+                      open={isOpen}
+                      onClose={handleSubmitOpen}
+                    >
+                      <DialogTitle>Submit Review</DialogTitle>
+                      <DialogContent>
+                        <Rating
+                          size="large"
+                          value={Ratings}
+                          onChange={(e) => setRating(e.target.value)}
+                        />
+
+                        <textarea
+                          className="submitDialogTextArea"
+                          cols="30"
+                          rows="5"
+                          value={Reviews}
+                          onChange={(e) => setReview(e.target.value)}
+                        ></textarea>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={handleSubmitOpen} color="secondary">
+                          Cancel
+                        </Button>
+                        <Button onClick={handleReviewSubmit} color="primary">
+                          Submit
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
+                  </>
+                )
+              }
+
               <div className='reivew-card'>
                 {
-                  productDetails?.data?.product.reviews[0]
+                  productDetails.productDetails?.data?.product.reviews[0]
                     ?
                     (
-                      productDetails?.data?.product.reviews.map((review) => {
+                      productDetails.productDetails?.data?.product.reviews.map((review) => {
                         return (
                           < ReviewCard review={review} />
                         )

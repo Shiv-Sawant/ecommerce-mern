@@ -15,20 +15,19 @@ const Home = () => {
     return state.app
   })
 
-  // console.log(data.products[0].data.products, "datadata")
   console.log(data, "datadata")
   console.log(data, "datadata")
 
   useEffect(() => {
 
     dispatch(getProducts())
- 
+
 
     if (data?.error) {
       alert.error(data?.error?.response?.data?.message)
     }
 
-  }, [dispatch, alert])
+  }, [dispatch, alert, data?.error])
 
   return (
     <>

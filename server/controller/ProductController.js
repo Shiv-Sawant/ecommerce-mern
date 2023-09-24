@@ -2,14 +2,37 @@ const Product = require("../modal/ProductModal")
 const ErrorHandler = require("../utils/ErrorHandler")
 const catchAsyncError = require('../middleware/catchAsyncError')
 const ApiFeatures = require("../utils/apifeatures")
-
+const cloudinary = require('cloudinary')
 
 //create products for admin only
 exports.createProducts = catchAsyncError(async (req, res, next) => {
+    let images = []
+
+    if (typeof req.body.images === 'string') {
+        images.push(req.body.images)
+    } else {
+        images = req.body.images
+    }
+
+    const imageLinks = []
+
+    console.log(images.length, "imagesimages")
+
+    // for (let i = 0; i < images.length; i++) {
+    //     const result = await cloudinary.v2.uploader.upload(images[i], {
+    //         folder: 'avatars'
+    //     })
+
+    imageLinks.push({
+        public_id: "test id",
+        url: images[0]
+    })
+    // }
+    req.body.images = imageLinks
     req.body.user = req.user.id
     const product = await Product.create(req.body)
 
-    res.status(201).json({
+    res.json({
         success: true,
         product
     })
@@ -33,6 +56,16 @@ exports.getAllProducts = catchAsyncError(async (req, res, next) => {
     })
 })
 
+//get admin all products
+exports.getAllAdminProducts = catchAsyncError(async (req, res, next) => {
+    const products = await Product.find()
+
+    res.status(200).json({
+        success: true,
+        products
+    })
+})
+
 //get product details
 exports.getProductDetail = catchAsyncError(async (req, res, next) => {
     const product = await Product.findById(req.params.id)
@@ -51,6 +84,7 @@ exports.getProductDetail = catchAsyncError(async (req, res, next) => {
 exports.updateProducts = catchAsyncError(async (req, res, next) => {
     let product = await Product.findById(req.params.id);
 
+    console.log(req.body) 
     if (!product) {
         return next(new ErrorHandler('Product Id Incorrect', 404))
     }
@@ -162,7 +196,11 @@ exports.deleteReview = catchAsyncError(async (req, res, next) => {
 
     const numOfReview = reviews.length
 
-    await product.findByIdAndUpdate(req.query.productId, {
+    console.log(ratings,"ratings")
+    console.log(reviews,"ratings")
+    // console.log(ratings,"ratings")
+
+    await Product.findByIdAndUpdate(req.query.productId, {
         reviews, ratings, numOfReview
     }, {
         new: true,

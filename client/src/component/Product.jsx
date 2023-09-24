@@ -1,16 +1,14 @@
 import React from 'react'
-import ReactStars from 'react-rating-stars-component'
 import { Link } from 'react-router-dom'
+import { Rating } from "@material-ui/lab";
 
 const Product = ({ products }) => {
-  console.log(products)
   const options = {
-    size: window.innerWidth < 600 ? 20 : 30,
-    value: products.ratings,
-    isHalf: true,
-    // count:15,
-    activeColor: "rgba(239,67,67,1)"
-  }
+    size: "large",
+    value: products?.ratings,
+    readOnly: true,
+    precision: 0.5,
+  };
 
   return (
 
@@ -26,7 +24,7 @@ const Product = ({ products }) => {
       </div>
 
       <div className='stars'>
-        <ReactStars {...options} />
+        <Rating {...options} />
         <span className='starts-span'>({products.numOfReview} reviews)</span>
       </div>
 

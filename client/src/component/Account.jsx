@@ -17,7 +17,7 @@ const Account = () => {
   console.log(data, "datadata")
 
   useEffect(() => {
-    if(data.isAuthenticate === false) {
+    if(data?.isAuthenticate === false) {
       navigate('/login')
     }
 

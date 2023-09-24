@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, current, isAsyncThunkAction, } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
@@ -6,7 +6,7 @@ import axios from 'axios'
 export const getProducts = createAsyncThunk('getProducts', async (args, { rejectWithValue }) => {
     console.log(args, "from controller")
     try {
-        const res = await axios.get(`http://localhost:3500/api/v1/products?page=${args?.currentPage ? args?.currentPage : 1}&price[gte]=${args?.price[0] || 0}&price[lte]=${args?.price[1] || 25000}`)
+        const res = await axios.get(`http://localhost:3500/api/v1/products?page=${args?.currentPage ? args?.currentPage : 1}`)
         // const res = await axios.get(`http://localhost:3500/api/v1/products?page=${args.currentPage}`)
         console.log(res)
         return res
@@ -167,6 +167,187 @@ export const removeCartItem = createAsyncThunk('removeCartItem', async (args, { 
     }
 })
 
+// export const clearErrors = () => async (dispatch) => {
+//     dispatch({ type: CLEAR_ERRORS });
+//   };
+
+export const clearErrors = createAsyncThunk('clearError', async (args, { rejectWithValue }) => {
+    console.log('clear error')
+})
+
+export const newOrder = createAsyncThunk('newOrder', async (args, { rejectWithValue }) => {
+    try {
+        const re = await axios.post('http://localhost:3500/api/v1/order/new', args, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        return re
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
+
+export const getOrders = createAsyncThunk('getOrders', async (args, { rejectWithValue }) => {
+    try {
+
+        const re = await axios.get('http://localhost:3500/api/v1/admin/all/orders', { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        console.log(re, "rere")
+        return re
+
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
+
+export const getOrderDetail = createAsyncThunk('getOrderDetail', async (args, { rejectWithValue }) => {
+    try {
+        const re = await axios.get(`http://localhost:3500/api/v1/get/order/${args}`, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        return re
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
+export const createProductReview = createAsyncThunk('createProductReview', async (args, { rejectWithValue }) => {
+    try {
+        const re = await axios.post('http://localhost:3500/api/v1/review', args, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        return re
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
+export const getProductReview = createAsyncThunk('getProductReview', async (args, { rejectWithValue }) => {
+    try {
+        const re = await axios.get(`http://localhost:3500/api/v1/reviews?id=${args}`, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        return re
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
+export const getAdminAllProducts = createAsyncThunk('getAdminAllProducts', async (args, { rejectWithValue }) => {
+    try {
+        const re = await axios.get('http://localhost:3500/api/v1/admin/products', { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        return re
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
+export const createAdminProduct = createAsyncThunk('createAdminProduct', async (args, { rejectWithValue }) => {
+    try {
+        console.log(args)
+        const re = await axios.post('http://localhost:3500/api/v1/admin/product/new', args, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        return re
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
+export const deleteProduct = createAsyncThunk('deleteProduct', async (args, { rejectWithValue }) => {
+    try {
+        const re = await axios.delete(`http://localhost:3500/api/v1/admin/product/${args}`, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        return re
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
+export const updateProduct = createAsyncThunk('updateProduct', async (args, { rejectWithValue }) => {
+    try {
+        const re = await axios.put(`http://localhost:3500/api/v1/admin/product/${args.id}`, args.updateData, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        return re
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
+export const getAllOrders = createAsyncThunk('getAllOrders', async (args, { rejectWithValue }) => {
+    try {
+
+        const re = await axios.get('http://localhost:3500/api/v1/admin/all/orders', { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        console.log(re, "rere")
+        return re
+
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
+
+export const updateOrder = createAsyncThunk('updateOrder', async (args, { rejectWithValue }) => {
+    try {
+        const re = await axios.put(`http://localhost:3500/api/v1/admin/order/${args.id}`, args.update, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        console.log(args, "args")
+        return re
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
+export const deleteOrder = createAsyncThunk('deleteOrder', async (args, { rejectWithValue }) => {
+    try {
+        const re = await axios.delete(`http://localhost:3500/api/v1/admin/order/${args}`, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        return re
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
+export const allUser = createAsyncThunk('allUser', async (args, { rejectWithValue }) => {
+    try {
+        const re = await axios.get(`http://localhost:3500/api/v1/admin/users`, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        return re
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
+
+export const singleUserDetail = createAsyncThunk('singleUserDetail', async (args, { rejectWithValue }) => {
+    try {
+        console.log(args, "args")
+        const re = await axios.get(`http://localhost:3500/api/v1/admin/user/${args}`, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        return re
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
+export const updateUsers = createAsyncThunk('updateUsers', async (args, { rejectWithValue }) => {
+    try {
+        console.log(args, "args")
+        const re = await axios.put(`http://localhost:3500/api/v1/admin/user/${args.id}`, args, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        return re
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
+export const deleteUser = createAsyncThunk('deleteUser', async (args, { rejectWithValue }) => {
+    try {
+        const re = await axios.delete(`http://localhost:3500/api/v1/admin/user/${args}`, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        return re
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
+export const getReview = createAsyncThunk('getReview', async (args, { rejectWithValue }) => {
+    try {
+        const re = await axios.get(`http://localhost:3500/api/v1/reviews?id=${args}`, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        return re
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
+export const deleteReview = createAsyncThunk('deleteReview', async (args, { rejectWithValue }) => {
+    try {
+        console.log(args,"args")
+        const re = await axios.delete(`http://localhost:3500/api/v1/reviews?productId=${args.productId}&id=${args.id}`, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
+        return re
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
 
 let intialCartState = {
     cartItems: localStorage.getItem("cartItems")
@@ -192,7 +373,12 @@ export const productSlice = createSlice({
         isAuthenticate: false,
         userInfo: [],
         cart: intialCartState.cartItems,
-        shipping: intialShippingState.shippingInfo
+        shipping: intialShippingState.shippingInfo,
+        newOrder: [],
+        orders: [],
+        orderDetail: [],
+        allReviews: [],
+        singleUser: [],
     },
     extraReducers: {
         [getProducts.pending]: (state) => {
@@ -319,7 +505,7 @@ export const productSlice = createSlice({
         },
         [removeCartItem.pending]: (state) => {
             state.loading = true
-            state.cart = state.cart
+            state = { ...state }
         },
         [removeCartItem.fulfilled]: (state, action) => {
             state.loading = false
@@ -333,7 +519,7 @@ export const productSlice = createSlice({
         },
         [saveShipping.pending]: (state) => {
             state.loading = true
-            state.shipping = state.shipping
+            state = { ...state }
         },
         [saveShipping.fulfilled]: (state, action) => {
             state.loading = false
@@ -346,7 +532,207 @@ export const productSlice = createSlice({
             state.loading = false
             state.error = action.payload
         },
+        [clearErrors.pending]: (state) => {
+            state = { ...state }
+            // state.isAuthenticate = true
+        },
+        [clearErrors.fulfilled]: (state, action) => {
+            state = { ...state }
+            state.error = null
+        },
+        [clearErrors.rejected]: (state, action) => {
+            state = { ...state }
+        },
+        [newOrder.pending]: (state) => {
+            state.loading = true
+        },
+        [newOrder.fulfilled]: (state, action) => {
+            state.newOrder = action.payload
+            state.loading = false
+        },
+        [newOrder.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [getOrders.pending]: (state) => {
+            state.loading = true
+        },
+        [getOrders.fulfilled]: (state, action) => {
+            state.orders = action.payload
+            state.loading = false
+        },
+        [getOrders.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [getOrderDetail.pending]: (state) => {
+            state.loading = true
+        },
+        [getOrderDetail.fulfilled]: (state, action) => {
+            state.orderDetail = action.payload
+            state.loading = false
+        },
+        [getOrderDetail.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [createProductReview.pending]: (state) => {
+            state.loading = true
+        },
+        [createProductReview.fulfilled]: (state, action) => {
+            state.loading = false
+        },
+        [createProductReview.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [getProductReview.pending]: (state) => {
+            state.loading = true
+        },
+        [getProductReview.fulfilled]: (state, action) => {
+            state.loading = false
+            state.allReviews = action.payload
+        },
+        [getProductReview.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [getAdminAllProducts.pending]: (state) => {
+            state.loading = true
+        },
+        [getAdminAllProducts.fulfilled]: (state, action) => {
+            state.loading = false
+            state.products = action.payload
+        },
+        [getAdminAllProducts.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [createAdminProduct.pending]: (state) => {
+            state.loading = true
+        },
+        [createAdminProduct.fulfilled]: (state, action) => {
+            state.loading = false
+        },
+        [createAdminProduct.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [deleteProduct.pending]: (state) => {
+            state.loading = true
+        },
+        [deleteProduct.fulfilled]: (state, action) => {
+            state.loading = false
+        },
+        [deleteProduct.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [updateProduct.pending]: (state) => {
+            state.loading = true
+        },
+        [updateProduct.fulfilled]: (state, action) => {
+            state.loading = false
 
+        },
+        [updateProduct.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [getAllOrders.pending]: (state) => {
+            state.loading = true
+        },
+        [getAllOrders.fulfilled]: (state, action) => {
+            state.orders = action.payload
+            state.loading = false
+        },
+        [getAllOrders.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [updateOrder.pending]: (state) => {
+            state.loading = true
+        },
+        [updateOrder.fulfilled]: (state, action) => {
+            state.loading = false
+        },
+        [updateOrder.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [deleteOrder.pending]: (state) => {
+            state.loading = true
+        },
+        [deleteOrder.fulfilled]: (state, action) => {
+            state.loading = false
+        },
+        [deleteOrder.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [allUser.pending]: (state) => {
+            state.loading = true
+        },
+        [allUser.fulfilled]: (state, action) => {
+            state.loading = false
+            state.user = action.payload
+        },
+        [allUser.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [singleUserDetail.pending]: (state) => {
+            state.loading = true
+        },
+        [singleUserDetail.fulfilled]: (state, action) => {
+            state.loading = false
+            state.singleUser = action.payload
+        },
+        [singleUserDetail.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [updateUsers.pending]: (state) => {
+            state.loading = true
+        },
+        [updateUsers.fulfilled]: (state, action) => {
+            state.loading = false
+        },
+        [updateUsers.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [deleteUser.pending]: (state) => {
+            state.loading = true
+        },
+        [deleteUser.fulfilled]: (state, action) => {
+            state.loading = false
+        },
+        [deleteUser.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [getReview.pending]: (state, action) => {
+            state.loading = false
+        },
+        [getReview.fulfilled]: (state, action) => {
+            state.loading = false
+            state.allReviews = action.payload
+        },
+        [getReview.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        [deleteReview.pending]: (state, action) => {
+            state.loading = false
+        },
+        [deleteReview.fulfilled]: (state, action) => {
+            state.loading = false
+        },
+        [deleteReview.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
     }
 })
 

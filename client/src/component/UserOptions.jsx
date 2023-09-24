@@ -9,7 +9,7 @@ import PersonIcon from '@material-ui/icons/Person'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import ListAltIcon from '@material-ui/icons/ListAlt'
 import { BsFillCartFill } from 'react-icons/bs'
-
+import Inventory2Icon from '@mui/icons-material/Inventory2';
 import { userLogout } from '../featrues/productSlice'
 
 const UserOptions = ({ user }) => {
@@ -23,8 +23,9 @@ const UserOptions = ({ user }) => {
 
 
   const options = [
-    { icon: <ListAltIcon />, name: "Orders", func: orderFunc },
+    { icon: <ListAltIcon style={{ color: data?.orders?.data?.order?.length > 0 ? 'tomato' : "" }} />, name: `Orders ${data?.orders?.data?.order?.length}`, func: orderFunc },
     { icon: <PersonIcon />, name: "Profile", func: profileFunc },
+    { icon: <Inventory2Icon />, name: "All Products", func: productFunc },
     { icon: <BsFillCartFill style={{ color: data.cart.length > 0 ? 'tomato' : "" }} />, name: `Cart ${data.cart.length}`, func: cartFunc },
     { icon: <ExitToAppIcon />, name: "Logout", func: logoutFunc },
   ]
@@ -38,15 +39,19 @@ const UserOptions = ({ user }) => {
   }
 
   function dashboardFunc() {
-    navigate('/')
+    navigate('/admin/dashboard')
   }
 
   function orderFunc() {
-    navigate('/orders')
+    navigate('/order/me')
   }
 
   function profileFunc() {
     navigate('/account')
+  }
+
+  function productFunc() {
+    navigate('/products')
   }
 
   function logoutFunc() {

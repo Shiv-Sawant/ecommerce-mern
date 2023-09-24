@@ -5,6 +5,21 @@
   scroll-behavior: smooth;
 }
 
+.menuBurgerItem {
+  max-width: 30px !important;
+  min-width: 30px !important;
+  min-height: 4px !important;
+  max-height: 4px !important;
+}
+
+.menuBurger {
+  top: 20px !important;
+  min-height: 30px !important;
+  max-height: 30px !important;
+  max-width: 30px !important;
+  min-width: 30px !important;
+}
+
 .product-detail-container {
   background-color: rgb(220, 220, 220);
   height: 850px;
@@ -503,17 +518,17 @@ Carousel {
 /* user options */
 
 .speeddial {
-  top: 3vmax;
-  right: 3vmax;
+  top: 1vmax;
+  right: 1vmax;
   z-index: 11;
   position: fixed;
 }
 
 .speeddialicon {
   border-radius: 100px;
-  height: 65px;
-  width: 65px;
-  border: 1px solid black;
+  height: 60px;
+  width: 60px;
+  border: 1px solid rgb(61, 61, 61);
 }
 
 .account-container {
@@ -876,14 +891,30 @@ Carousel {
   display: flex;
 }
 
+.updateContainer {
+  min-width: 1000px !important;
+  max-width: 1000px !important;
+  /* overflow: hidden; */
+}
+
+
+
+
 .confirmfirstcontainer {
   min-width: 1200px;
+  overflow: scroll;
   /* background-color: red; */
   display: flex;
   flex-direction: column;
   gap: 5rem;
   border-right: 1.5px solid gray;
 }
+
+.updateordercontainer {
+  min-width: 900px;
+}
+
+
 
 .confirmfirsttop {
   display: flex;
@@ -946,6 +977,7 @@ Carousel {
 }
 
 .confirlastchild-1 {
+  /* overflow: hidden; */
   box-sizing: border-box;
   padding-right: 3rem;
   display: flex;
@@ -957,10 +989,17 @@ Carousel {
   justify-content: space-between;
 }
 
+.updateordercontainer img {
+  width: 100px !important;
+  height: 100px !important;
+}
+
 .confirmordercontainer img {
   width: 100px;
   height: 100px;
 }
+
+
 
 .confirmsecondcontainer {
   display: flex;
@@ -1010,6 +1049,20 @@ Carousel {
   justify-content: space-between;
 }
 
+.confirmsecondmiddle select {
+  width: 400px;
+  height: 55px;
+  position: relative;
+  padding-left: 3rem;
+}
+
+.confirmsecondmiddle svg {
+  position: absolute;
+  z-index: 1;
+  transform: translateX(15px) translateY(15px);
+}
+
+
 .confirmsecondcontainer button {
   background-color: tomato;
   color: white;
@@ -1019,5 +1072,534 @@ Carousel {
   width: 400px;
   height: 55px;
   font-size: 1rem;
+}
 
+/* payment section */
+.payment-container {
+  /* background-color: red; */
+  height: 800px;
+  box-sizing: border-box;
+  padding: 2rem;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  min-width: 1901px;
+  max-width: 1901px;
+}
+
+.payment-container form {
+  height: 400px;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.payment-container form>div {
+  display: flex;
+  gap: 1rem;
+  color: black;
+}
+
+.payment-container form svg {
+  position: absolute;
+  transform: translateX(15px) translateY(15px);
+}
+
+.payment-container form input {
+  width: 400px;
+  height: 55px;
+  background-color: tomato;
+  color: white;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  cursor: pointer;
+}
+
+.payment-input {
+  /* background-color: red; */
+  box-sizing: border-box;
+  padding-left: 3.5rem;
+  padding-top: 1.1rem;
+  width: 400px;
+  height: 55px;
+  margin: auto;
+  text-align: center;
+  border: 1px solid gray;
+}
+
+/* success section */
+
+.success-container {
+  /* background-color: /red; */
+  box-sizing: border-box;
+  padding: 4rem;
+  min-height: 800px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.success-container h1 {
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  font-weight: 500;
+}
+
+.success-container svg {
+  background-color: tomato;
+  color: white;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+}
+
+.success-container button {
+  background-color: rgb(80, 80, 80);
+  border: none;
+  outline: none;
+  width: 200px;
+  height: 55px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+
+.greencolor {
+  color: green;
+}
+
+.redcolor {
+  color: red;
+}
+
+.order-container {
+  /* background-color: red; */
+  height: 800px;
+  min-width: 1900px;
+  box-sizing: border-box;
+  padding: 2rem 8rem;
+}
+
+/* orders section */
+
+.orderdetailcontainer {
+  /* background-color: red; */
+  min-width: 1900px;
+  min-height: 1000px;
+  /* max-height: 1000px; */
+  box-sizing: border-box;
+  padding: 8rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  /* overflow: scroll; */
+}
+
+.orderdetailcontainer h1 {
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  font-weight: 500;
+  font-size: 3rem;
+  color: tomato;
+}
+
+.orderdetailcontainer h2 {
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  font-weight: 500;
+  font-size: 2rem;
+}
+
+.orderdetailcontainer-div {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.orderdetailcontainer-div div:first-child {
+  padding: 0px;
+}
+
+.orderdetailcontainer-div div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-left: 2rem;
+}
+
+.orderdetailcontainer-div p {
+  font-weight: 600;
+  color: rgb(61, 61, 61);
+}
+
+.orderdetailcontainer-div span {
+  font-weight: 100;
+  margin-left: 0.5rem;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+}
+
+.orderdetail-cart-body-left {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+}
+
+.orderdetail-cart-body-right {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+}
+
+.orderdetail-cart-body-right div {
+  align-self: center !important;
+  transform: translateY(-60px);
+}
+
+.orderdetail-cart-body {
+  display: flex !important;
+  justify-content: center !important;
+  min-height: 150px;
+}
+
+.MuiDialogContent-root {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+/* admin dashboard */
+.dashoardcontainer {
+  /* background-color: red; */
+  width: 1900px;
+  height: 1000px;
+  display: flex;
+  flex-direction: column;
+  color: black !important;
+  box-sizing: border-box;
+}
+
+.dashboardnavbar {
+  background-color: rgb(23, 130, 183);
+  height: 100px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.dashboardnavbar img {
+  transition: all 0.5s;
+  height: 300px;
+  position: absolute;
+  top: -95px;
+  left: 100px;
+  fill: white;
+  /* color: wheat; */
+  /* background: white; */
+  /* align-self: flex-start;
+  justify-self: flex-start; */
+}
+
+.dashoardcontainer img:hover {
+  filter: drop-shadow(0 0 10px tomato);
+}
+
+.dashboarddivided a {
+  color: black;
+}
+
+.dashboarddivided {
+  display: flex;
+  /* background-color: red; */
+  min-height: 900px;
+  /* overflow: scroll; */
+}
+
+.dashboarddivided .dashboardsidebar {
+  background-color: #fff4df;
+  min-width: 300px;
+  max-width: 300px;
+  box-sizing: border-box;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  border-right: 1px solid gray;
+}
+
+.dashboarddivided .dashboardsidebar h2,
+.dashboarddivided .dashboardsidebar .MuiTreeItem-label {
+  font-size: 1.5rem;
+  font-weight: 400;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+}
+
+.dashboarddivided .dashboardsidebar svg {
+  margin-right: 1rem;
+  width: 40px;
+  height: 20px;
+}
+
+.dashboarddivided .dashboardmain {
+  /* background-color: rgb(237, 215, 174); */
+  /* background-color: green; */
+  /* flex: 1; */
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  min-width: 1600px;
+  max-width: 1600px;
+  min-height: 885px;
+  max-height: 885px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  padding-bottom: 1rem;
+  align-items: center;
+}
+
+.dashboardmain-header {
+  background-color: rgb(200, 134, 48);
+  min-height: 100px;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  font-weight: 500;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  font-size: 1.2rem;
+}
+
+.dashboardmain-buttons {
+  /* background-color: red; */
+  height: 400px;
+  box-sizing: border-box;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
+
+.dashboardmain-buttons button {
+  /* background-color: red; */
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  border-radius: 100%;
+  outline: none;
+  gap: 0.5rem;
+  border: none;
+}
+
+.dashboardmain-buttons button span {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.dashboardmain-buttons .button-1 {
+  background-color: #dfacac;
+  color: white;
+}
+
+.dashboardmain-buttons .button-2 {
+  background-color: #e2d700;
+  color: black;
+}
+
+.dashboardmain-buttons .button-3 {
+  background-color: #787373;
+  color: white;
+}
+
+.linechart {
+  /* background-color: red; */
+  height: 500px;
+  min-width: 1655px;
+  max-width: 1655px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.linech {
+  width: 1200px !important;
+  height: 400px;
+}
+
+.donutchart {
+  min-height: 500px;
+  max-height: 500px;
+  min-width: 1600px;
+  max-width: 1600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: red; */
+}
+
+.adminproductcontainer {
+  box-sizing: border-box;
+  padding: 1rem;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.createproducts {
+  background-color: rgb(225, 225, 225);
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.createbox {
+  background-color: white;
+  min-height: 700px;
+  max-height: 700px;
+  min-width: 500px;
+  max-width: 500px;
+  box-sizing: border-box;
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-around;
+}
+
+.createbox h1 {
+  color: gray;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+}
+
+/* .createbox input:file */
+
+/* .createbox input {
+  background-color: red;
+  margin-left: 10px;
+} */
+
+.createbox input::file-selector-button {
+  display: none;
+  padding: 2rem 1rem;
+  margin: 0%;
+}
+
+.createproductfileinput {
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.createbox input,
+.createbox select {
+  height: 55px;
+  width: 400px;
+  box-sizing: border-box;
+  padding-left: 3rem;
+  position: relative;
+  outline: none;
+  border: 1px solid black;
+}
+
+.createbox button {
+  height: 55px;
+  width: 400px;
+  background-color: tomato;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  cursor: pointer;
+}
+
+.createbox svg {
+  transform: translateX(15px) translateY(15px);
+  position: absolute;
+  color: black;
+  z-index: 1;
+}
+
+.adminproductcontainer svg:hover {
+  color: rgb(236, 30, 30);
+  /* background-color: tomato; */
+}
+
+.adminproductcontainer svg {
+  cursor: pointer;
+  transform: all 0.5s;
+}
+
+.reviewcontainer {
+  /* background-color: red; */
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.reviewcontainer .reviewcontainer-firstdiv {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.reviewcontainer h1 {
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  font-weight: 500;
+  margin: auto;
+}
+
+.reviewcontainer-firstdiv button{
+  height: 55px;
+  width: 300px;
+  background-color: tomato;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.reviewcontainer input{
+  height: 55px;
+  width: 300px;
+  padding-left: 3rem;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.reviewcontainer .review-svg{
+  position: absolute;
+  z-index: 1;
+  transform: translateX(15px) translateY(15px);
 }

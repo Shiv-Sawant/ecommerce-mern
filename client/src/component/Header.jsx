@@ -8,7 +8,6 @@ const Header = () => {
             <ReactNavbar
                 burgerColorHover="#eb4034"
                 burgerColor="black"
-                
                 style={{
                     zIndex: "12"
                 }}

@@ -10,7 +10,7 @@ const Products = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [price, setPrice] = useState([0, 25000])
   const dispatch = useDispatch()
-  const { products, productCount, loading } = useSelector((state) => {
+  const { products, loading } = useSelector((state) => {
     return state.app
   })
 
@@ -62,10 +62,7 @@ const Products = () => {
                 />
               </div>
 
-
             </div>
-
-
 
             <div className='products-container-body'>
               {products?.data?.products.map((res) => {

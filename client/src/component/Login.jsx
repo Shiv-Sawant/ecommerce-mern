@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { BiSolidUserCircle } from 'react-icons/bi'
 import { userLogin, userRegister } from '../featrues/productSlice'
@@ -50,7 +50,7 @@ const Login = () => {
         }
     }
 
-    const redirect = window.location.search ? window.location.search.split("=")[1] : "/account"
+    const redirect = window.location.search ? window.location.search.split("=")[1] : "account"
 
     // console.log(redirect, "redirect")
 

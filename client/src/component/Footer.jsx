@@ -36,9 +36,9 @@ const Footer = () => {
                     <h1>Follow Us</h1>
                 </div>
                 <div className='links'>
-                    <a href="https://www.instagram.com/shivsawant58/" target='_blank'><h4>Instagram</h4></a>
-                    <a href="https://www.linkedin.com/in/shiv-sawant-3bbb26229/" target='_blank'> <h4>LinkedIn</h4></a>
-                    <a href="https://www.facebook.com/shiv.sawant.946/" target='_blank'> <h4>Facebook</h4></a>
+                    <a href="https://www.instagram.com/shivsawant58/" target='_blank' rel='noreferrer'><h4>Instagram</h4></a>
+                    <a href="https://www.linkedin.com/in/shiv-sawant-3bbb26229/" target='_blank' rel='noreferrer'> <h4>LinkedIn</h4></a>
+                    <a href="https://www.facebook.com/shiv.sawant.946/" target='_blank'rel='noreferrer'> <h4>Facebook</h4></a>
 
                 </div>
             </div>
