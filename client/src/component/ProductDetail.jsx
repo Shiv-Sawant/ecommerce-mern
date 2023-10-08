@@ -28,7 +28,7 @@ const ProductDetail = () => {
     return state.app
   })
 
-  console.log(productDetails, "productDetailsproductDetails")
+  // console.log(productDetails, "productDetailsproductDetails")
 
   const handleIncrease = () => {
     if (Number(productDetails?.productDetails?.data?.product?.Stock) !== item) {
@@ -75,8 +75,10 @@ const ProductDetail = () => {
   };
 
   useEffect(() => {
-    if (productDetails?.error) {
+
+    if (productDetails?.error != null) {
       alerts.error(productDetails?.error?.message)
+      // console.log(productDetails?.error?.message,"productDetails?.error?.message")
       dispatch(clearErrors())
     }
 
@@ -88,7 +90,7 @@ const ProductDetail = () => {
       alerts.success('Review Send Successfully  ')
     }
 
-  }, [dispatch, productDetails?.error,alerts,productDetails?.newReview?.data?.success,params.id])
+  }, [dispatch, productDetails?.error, alerts, productDetails?.newReview?.data?.success, params.id])
 
   return (
     <>
@@ -108,8 +110,8 @@ const ProductDetail = () => {
                   {
                     productDetails?.productDetails?.data?.product?.images &&
                     productDetails?.productDetails?.data?.product?.images.map((item, i) => {
-                      // console.log(item,"itemitem")
-                      // console.log(i,"itemitem")
+                      // // console.log(item,"itemitem")
+                      // // console.log(i,"itemitem")
                       return (
                         <div className='inner-img-div'>
                           <img src={item.url} key={item.url} alt={`${i} Slide`} />

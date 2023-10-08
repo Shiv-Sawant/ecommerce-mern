@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Product from './Product'
 import Loader from './Loader'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProducts } from '../featrues/productSlice'
+import { clearErrors, getProducts } from '../featrues/productSlice'
 import Pagination from "react-js-pagination";
 import { Typography, Slider } from '@mui/material'
 
@@ -10,29 +10,31 @@ const Products = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [price, setPrice] = useState([0, 25000])
   const dispatch = useDispatch()
-  const { products, loading } = useSelector((state) => {
+  const { products, loading, error } = useSelector((state) => {
     return state.app
   })
 
-  console.log(products)
+  // console.log(products)
 
   const setCurrentPageNo = (e) => {
-    console.log(e,"currentpage")
+    // console.log(e, "currentpage")
     setCurrentPage(e)
   }
 
-  console.log(price)
+  // console.log(price)
 
   const pricehandler = (event, newPrice) => {
     setPrice(newPrice)
   }
 
-  console.log(price, "priceprice")
+  // console.log(price, "priceprice")
 
   useEffect(() => {
-    dispatch(getProducts({currentPage, price}))
-    console.log(price,"pricepriceprice")
-  }, [dispatch, currentPage, price])
+    if (error != null) {
+      dispatch(clearErrors())
+    }
+    dispatch(getProducts({ currentPage, price }))
+  }, [dispatch, currentPage, price,error])
 
   return (
     <>

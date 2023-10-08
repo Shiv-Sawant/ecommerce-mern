@@ -31,7 +31,7 @@ const UpdateProduct = () => {
     imageInput: null
   })
 
-  console.log(data, "datadata")
+  // console.log(data, "datadata")
 
   const params = useParams()
   const categories = [

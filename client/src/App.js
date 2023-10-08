@@ -12,8 +12,8 @@ import Account from './component/Account';
 import UpdateProfile from './component/UpdateProfile';
 import Shipping from './component/Shipping'
 import { store } from './store'
-import { userAccountInfo } from './featrues/productSlice';
-import { useSelector } from 'react-redux';
+import { clearErrors, userAccountInfo } from './featrues/productSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import Cart from './component/Cart';
 import ConfirmOrder from './component/ConfirmOrder';
 import ProceedPayment from './component/ProceedPayment';
@@ -32,26 +32,29 @@ import UpdateOrder from './component/UpdateOrder';
 import AdminUsers from './component/AdminUsers';
 import AdminUpdateUser from './component/AdminUpdateUser';
 import AdminAllReviews from './component/AdminAllReviews';
+import { useAlert } from 'react-alert';
+import ProtectedRoute from './route/ProtectedRoute';
+import StripeProcessPayment from './component/StripeProcessPayment';
 
 
 function App() {
+  const alerts = useAlert()
   var user = useSelector((state) => state.app)
   const [StripeKey, setStripeKey] = useState()
+  const stripeKey = "pk_test_51NsTSESA97L9ozy2QgqGl3zoVMU5gtNIxsySW5rUZvcc4Cy45cNe2pW6T27rXxBmyGR9MLrwcXpeeXjphsxeIXSh00oDRKeXAm"
+  const stripeLoader = loadStripe(stripeKey)
 
-  console.log(user, "userusers")
 
-  const getStripeKey = async () => {
-    if (user?.isAuthenticate !== false) {
-      const data = await axios.get('http://localhost:3500/api/v1/sendApiKey',
-        { withCredentials: true },
-        {
-          headers:
-            { "Content-Type": "application/json" }
-        }
-      )
-      setStripeKey(data.data.stripapikey)
-      console.log(data, "datadata")
-    }
+  async function getStripeKey() {
+    console.log('into the get stripe key')
+    const data = await axios.get('http://localhost:3500/api/v1/sendApiKey',
+      { withCredentials: true },
+      {
+        headers:
+          { "Content-Type": "application/json" }
+      }
+    )
+    setStripeKey(data.data.stripapikey)
 
   }
 
@@ -62,9 +65,17 @@ function App() {
       }
     })
 
-    getStripeKey()
+    if (user?.error != null) {
+      alerts.error(user?.error?.message)
+      store.dispatch(clearErrors())
+    }
+
     store.dispatch(userAccountInfo())
-  }, [])
+    // getStripeKey()
+
+  }, [StripeKey])
+
+  console.log(StripeKey, "StripeKeyStripeKey")
 
   return (
 
@@ -72,13 +83,17 @@ function App() {
       <Router>
         <Header />
         {user?.isAuthenticate && <UserOptions user={user} />}
-        {StripeKey && (
-          <Elements stripe={loadStripe(StripeKey)}>
+
+        {user?.isAuthenticate ? StripeKey && (
+          // <Elements stripe={stripeLoader}>
             <Routes>
-              <Route path='/process/payment' element={<ProceedPayment />} />
+              <Route path='/process/payment' element={<StripeProcessPayment />} />
             </Routes>
-          </Elements>
-        )}
+          // </Elements>
+        )
+          :
+          null}
+
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/account' element={<Account />} />

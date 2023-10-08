@@ -19,8 +19,8 @@ const UpdateProfile = () => {
     updateAvatarInput: data?.userInfo?.data?.user?.avatar?.url,
   })
 
-  console.log(data, "data")
-  console.log(UpdateInput)
+  // console.log(data, "data")
+  // console.log(UpdateInput)
 
   const handleUserInput = (e) => {
     const reader = new FileReader()

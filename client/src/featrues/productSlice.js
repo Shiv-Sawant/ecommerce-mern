@@ -4,11 +4,11 @@ import axios from 'axios'
 
 // getting products data
 export const getProducts = createAsyncThunk('getProducts', async (args, { rejectWithValue }) => {
-    console.log(args, "from controller")
+    // console.log(args, "from controller")
     try {
         const res = await axios.get(`http://localhost:3500/api/v1/products?page=${args?.currentPage ? args?.currentPage : 1}`)
         // const res = await axios.get(`http://localhost:3500/api/v1/products?page=${args.currentPage}`)
-        console.log(res)
+        // console.log(res)
         return res
     } catch (error) {
         return rejectWithValue(error)
@@ -19,9 +19,9 @@ export const getProducts = createAsyncThunk('getProducts', async (args, { reject
 //getting product detail
 export const productDetail = createAsyncThunk('productDetail', async (id, { rejectWithValue }) => {
     try {
-        console.log(id, "from slice")
+        // console.log(id, "from slice")
         const res = await axios.get(`http://localhost:3500/api/v1/product/${id}`)
-        console.log(res, "resres")
+        // console.log(res, "resres")
         return res
     } catch (error) {
         return rejectWithValue(error)
@@ -31,7 +31,7 @@ export const productDetail = createAsyncThunk('productDetail', async (id, { reje
 //user login
 export const userLogin = createAsyncThunk('userLogin', async (args, { rejectWithValue }) => {
     try {
-        console.log(args, "args login")
+        // console.log(args, "args login")
 
         let data = {
             email: args.loginEmail,
@@ -56,7 +56,7 @@ export const userLogin = createAsyncThunk('userLogin', async (args, { rejectWith
 
 //user register
 export const userRegister = createAsyncThunk('userRegister', async (args, { rejectWithValue }) => {
-    console.log(args, "from register route")
+    // console.log(args, "from register route")
     try {
         let registerData = {
             name: args.name,
@@ -108,7 +108,7 @@ export const userLogout = createAsyncThunk('userLogout', async (args, { rejectWi
 
 //user update
 export const userUpdate = createAsyncThunk('userUpdate', async (args, { rejectWithValue }) => {
-    console.log(args, "from register route")
+    // console.log(args, "from register route")
     try {
         let registerData = {
             name: args.updateNameInput,
@@ -133,7 +133,7 @@ export const userUpdate = createAsyncThunk('userUpdate', async (args, { rejectWi
 export const cartItems = createAsyncThunk('cartItems', async (args, { rejectWithValue }) => {
     try {
 
-        console.log(args, "args")
+        // console.log(args, "args")
         const res = await axios.get(`http://localhost:3500/api/v1/product/${args.product}`)
 
         let data = {
@@ -152,7 +152,7 @@ export const cartItems = createAsyncThunk('cartItems', async (args, { rejectWith
 
 export const saveShipping = createAsyncThunk('saveShipping', async (args, { rejectWithValue }) => {
     try {
-        console.log(args, "argsargs")
+        // console.log(args, "argsargs")
         return args
     } catch (error) {
         return rejectWithValue(error)
@@ -172,7 +172,7 @@ export const removeCartItem = createAsyncThunk('removeCartItem', async (args, { 
 //   };
 
 export const clearErrors = createAsyncThunk('clearError', async (args, { rejectWithValue }) => {
-    console.log('clear error')
+    // console.log('clear error')
 })
 
 export const newOrder = createAsyncThunk('newOrder', async (args, { rejectWithValue }) => {
@@ -188,7 +188,7 @@ export const getOrders = createAsyncThunk('getOrders', async (args, { rejectWith
     try {
 
         const re = await axios.get('http://localhost:3500/api/v1/admin/all/orders', { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
-        console.log(re, "rere")
+        // console.log(re, "rere")
         return re
 
     } catch (error) {
@@ -234,7 +234,7 @@ export const getAdminAllProducts = createAsyncThunk('getAdminAllProducts', async
 
 export const createAdminProduct = createAsyncThunk('createAdminProduct', async (args, { rejectWithValue }) => {
     try {
-        console.log(args)
+        // console.log(args)
         const re = await axios.post('http://localhost:3500/api/v1/admin/product/new', args, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
         return re
     } catch (err) {
@@ -264,7 +264,7 @@ export const getAllOrders = createAsyncThunk('getAllOrders', async (args, { reje
     try {
 
         const re = await axios.get('http://localhost:3500/api/v1/admin/all/orders', { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
-        console.log(re, "rere")
+        // console.log(re, "rere")
         return re
 
     } catch (error) {
@@ -275,7 +275,7 @@ export const getAllOrders = createAsyncThunk('getAllOrders', async (args, { reje
 export const updateOrder = createAsyncThunk('updateOrder', async (args, { rejectWithValue }) => {
     try {
         const re = await axios.put(`http://localhost:3500/api/v1/admin/order/${args.id}`, args.update, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
-        console.log(args, "args")
+        // console.log(args, "args")
         return re
     } catch (err) {
         return rejectWithValue(err)
@@ -303,7 +303,7 @@ export const allUser = createAsyncThunk('allUser', async (args, { rejectWithValu
 
 export const singleUserDetail = createAsyncThunk('singleUserDetail', async (args, { rejectWithValue }) => {
     try {
-        console.log(args, "args")
+        // console.log(args, "args")
         const re = await axios.get(`http://localhost:3500/api/v1/admin/user/${args}`, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
         return re
     } catch (err) {
@@ -313,7 +313,7 @@ export const singleUserDetail = createAsyncThunk('singleUserDetail', async (args
 
 export const updateUsers = createAsyncThunk('updateUsers', async (args, { rejectWithValue }) => {
     try {
-        console.log(args, "args")
+        // console.log(args, "args")
         const re = await axios.put(`http://localhost:3500/api/v1/admin/user/${args.id}`, args, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
         return re
     } catch (err) {
@@ -341,7 +341,7 @@ export const getReview = createAsyncThunk('getReview', async (args, { rejectWith
 
 export const deleteReview = createAsyncThunk('deleteReview', async (args, { rejectWithValue }) => {
     try {
-        console.log(args,"args")
+        // console.log(args, "args")
         const re = await axios.delete(`http://localhost:3500/api/v1/reviews?productId=${args.productId}&id=${args.id}`, { withCredentials: true }, { headers: { 'Content-Type': 'application/json' } })
         return re
     } catch (err) {
@@ -387,6 +387,7 @@ export const productSlice = createSlice({
         [getProducts.fulfilled]: (state, action) => {
             state.loading = false
             state.products = action.payload
+            state.error = null
         },
         [getProducts.rejected]: (state, action) => {
             state.loading = false
@@ -409,7 +410,7 @@ export const productSlice = createSlice({
 
         },
         [userLogin.fulfilled]: (state, action) => {
-            console.log("into the userLogin slice")
+            // console.log("into the userLogin slice")
             state.loading = false
             state.isAuthenticate = true
             state.user = action.payload
@@ -478,7 +479,7 @@ export const productSlice = createSlice({
         [cartItems.fulfilled]: (state, action) => {
             state.loading = false
 
-            console.log('into the action')
+            // console.log('into the action')
 
             const item = action.payload
             let carty = current(state)
@@ -486,7 +487,7 @@ export const productSlice = createSlice({
             let isItemExist = carty.cart.find(
                 (i) => i.product === item.product
             )
-            console.log(item, "itemitem")
+            // console.log(item, "itemitem")
 
             if (isItemExist !== undefined) {
                 state.cart = state.cart.map((i) =>
@@ -497,7 +498,7 @@ export const productSlice = createSlice({
                 state.cart = [...state?.cart || [], item]
             }
             localStorage.setItem('cartItems', JSON.stringify(state.cart))
-            console.log('exit reducer')
+            // console.log('exit reducer')
         },
         [cartItems.rejected]: (state, action) => {
             state.loading = false
@@ -533,15 +534,17 @@ export const productSlice = createSlice({
             state.error = action.payload
         },
         [clearErrors.pending]: (state) => {
-            state = { ...state }
             // state.isAuthenticate = true
+            state.loading = true
         },
         [clearErrors.fulfilled]: (state, action) => {
-            state = { ...state }
             state.error = null
+            state.loading = false
         },
         [clearErrors.rejected]: (state, action) => {
-            state = { ...state }
+            state.error = action.payload
+            state.loading = false
+
         },
         [newOrder.pending]: (state) => {
             state.loading = true

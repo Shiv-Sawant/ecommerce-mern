@@ -47,9 +47,11 @@ const ProceedPayment = () => {
 
       const data = await axios.post('http://localhost:3500/api/v1/proceed/payment', paymentData, { withCredentials: true }, { headers })
 
-      const client_secret = data.data.client_secret
+      const client_secret = data.data.clientSecret
 
-      if (!stripe || !elements) return;
+      if (!stripe || !elements) {
+        return;
+      }
 
       const result = await stripe.confirmCardPayment(client_secret, {
         payment_method: {

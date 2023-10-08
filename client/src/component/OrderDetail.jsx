@@ -10,9 +10,9 @@ const OrderDetail = () => {
         return state.app
     })
 
-    console.log(data?.orderDetail?.data?.order.orderItems)
+    // console.log(data?.orderDetail?.data?.order.orderItems)
 
-    console.log(data, 'order detail')
+    // console.log(data, 'order detail')
 
     useEffect(() => {
         dispatch(getOrderDetail(params.id))

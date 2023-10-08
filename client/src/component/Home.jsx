@@ -4,30 +4,29 @@ import '../styles/home.css'
 import '../styles/featureproduct.css'
 import { CgMouse } from "react-icons/cg";
 import Product from './Product'
-import { getProducts } from '../featrues/productSlice'
+import { clearErrors, getProducts } from '../featrues/productSlice'
 import { useAlert } from 'react-alert';
 import Loader from './Loader'
 
 const Home = () => {
-  const alert = useAlert()
+  const alerts = useAlert()
   const dispatch = useDispatch()
   const data = useSelector((state) => {
     return state.app
   })
 
-  console.log(data, "datadata")
-  console.log(data, "datadata")
+  // console.log(data, "datadata")
+  // console.log(data, "datadata")
 
   useEffect(() => {
+    if (data?.error != null) {
+      // alerts.error(data?.error?.message)
+      dispatch(clearErrors())
+    }
 
     dispatch(getProducts())
 
-
-    if (data?.error) {
-      alert.error(data?.error?.response?.data?.message)
-    }
-
-  }, [dispatch, alert, data?.error])
+  }, [dispatch, alerts, data?.error])
 
   return (
     <>
@@ -75,7 +74,7 @@ const Home = () => {
                   :
                   <div className='product-component'>
                     {
-                      console.log(data)
+                      // console.log(data)
 
                     }
                     {

@@ -103,14 +103,14 @@ const ConfirmOrder = () => {
             <div>
 
               <p>GST : </p>
-              <span>₹ {tax}</span>
+              <span>₹ {Math.round(tax)}</span>
             </div>
 
           </div>
 
           <div className='confirmsecondbottom'>
             <h3>Total</h3>
-            <span>₹ {totalCost}</span>
+            <span>₹ {Math.round(totalCost)}</span>
           </div>
 
           <div>

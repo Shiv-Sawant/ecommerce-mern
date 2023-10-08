@@ -4,7 +4,7 @@ import { Rating } from "@material-ui/lab";
 
 
 const ReviewCard = ({ review }) => {
-  console.log(review, 'reviewreview')
+  // console.log(review, 'reviewreview')
   const options = {
     size: "large",
     value: Number(review?.rating),

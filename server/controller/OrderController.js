@@ -7,7 +7,7 @@ const Product = require('../modal/ProductModal')
 exports.createOrder = async (req, res, next) => {
     const { shippingInfo, orderItems, paymentInfo, itemsPrice, taxPrice, shippingPrice, totalPrice } = req.body
 
-    console.log(req.body, "req.bodyreq.bodyreq.body")
+    // console.log(req.body, "req.bodyreq.bodyreq.body")
     const order = await Order.create({
         shippingInfo,
         orderItems,

@@ -23,8 +23,8 @@ const Login = () => {
         return state.app
     })
 
-    console.log(data)
-    console.log(data)
+    // console.log(data)
+    // console.log(data)
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -52,7 +52,7 @@ const Login = () => {
 
     const redirect = window.location.search ? window.location.search.split("=")[1] : "account"
 
-    // console.log(redirect, "redirect")
+    // // console.log(redirect, "redirect")
 
     useEffect(() => {
         if (data?.isAuthenticate) {

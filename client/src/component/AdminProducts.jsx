@@ -73,7 +73,7 @@ const AdminProducts = () => {
 
   const rows = []
 
-  // console.log(data.products.data.products.length)
+  // // console.log(data.products.data.products.length)
 
   for (let i = 0; i < data?.products?.data?.products.length; i++) {
     rows.push({

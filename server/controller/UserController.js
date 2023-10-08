@@ -8,16 +8,16 @@ const cloudinary = require('cloudinary')
 //register route
 exports.userRegister = catchAsyncError(async (req, res, next) => {
 
-    // console.log(req.body)
-    console.log('into register route')
+    // // console.log(req.body)
+    // console.log('into register route')
 
     // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
     //     folder: 'avatars',
     //     width: 150
     // })
 
-    console.log(req.body,"req.body register")
-    console.log('into register route')
+    // console.log(req.body,"req.body register")
+    // console.log('into register route')
 
     const { name, email, password, avatar } = req.body
 
@@ -39,7 +39,7 @@ exports.userRegister = catchAsyncError(async (req, res, next) => {
 
 // login route
 exports.userLogin = async (req, res, next) => {
-    console.log('into login route')
+    // console.log('into login route')
     // const data = await req.body
     const { email, password } = req.body
 
@@ -49,7 +49,7 @@ exports.userLogin = async (req, res, next) => {
 
     const user = await User.findOne({ email }).select('+password')
 
-    console.log(user, "user")
+    // console.log(user, "user")
 
     if (!user || user === null) {
         return next(new ErrorHandler("Invalid email or password", 401));
@@ -62,9 +62,9 @@ exports.userLogin = async (req, res, next) => {
     }
 
     sendToken(user, 200, res);
-    console.log('exit sendtoken function')
-    console.log(await req, "getting cookie")
-    console.log(await req.cookies.getCookie, "getting cookie")
+    // console.log('exit sendtoken function')
+    // console.log(await req, "getting cookie")
+    // console.log(await req.cookies.getCookie, "getting cookie")
 }
 
 //logout route
@@ -83,7 +83,7 @@ exports.userlogout = catchAsyncError(async (req, res, next) => {
 
 // forgot password route
 exports.userForgotPassword = catchAsyncError(async (req, res, next) => {
-    console.log("in forgot password route")
+    // console.log("in forgot password route")
 
     const user = await User.findOne({ email: req.body.email })
 
@@ -102,14 +102,14 @@ exports.userForgotPassword = catchAsyncError(async (req, res, next) => {
     const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\n If you have not requested this email, then please ignore it`
 
     try {
-        console.log("into the try catch")
+        // console.log("into the try catch")
         await sendEmail({
             email: user.email,
             subject: 'Ecommerce password recovery',
             message
         })
 
-        console.log("compleote send mail function")
+        // console.log("compleote send mail function")
 
         res.status(200).json({
             success: true,
@@ -156,9 +156,9 @@ exports.resetPassword = catchAsyncError(async (req, res, next) => {
 
 // Get User details
 exports.getUserDetails = catchAsyncError(async (req, res, next) => {
-    console.log( "req.user.idreq.user.id")
-    // console.log(req.user, "req.user.idreq.user.id")
-    // console.log(req.user.id, "req.user.idreq.user.id")
+    // console.log( "req.user.idreq.user.id")
+    // // console.log(req.user, "req.user.idreq.user.id")
+    // // console.log(req.user.id, "req.user.idreq.user.id")
 
     const user = await User.findById(req.user.id);
 
@@ -176,13 +176,13 @@ exports.updatePassword = catchAsyncError(async (req, res, next) => {
 
     const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
 
-    console.log(req.user, "req.user.idreq.user.id")
+    // console.log(req.user, "req.user.idreq.user.id")
 
     if (!isPasswordMatched) {
         return next(new ErrorHandler("Old Password is incorrect", 400))
     }
 
-    console.log(req.body.newPassword, req.body.confirmPassword)
+    // console.log(req.body.newPassword, req.body.confirmPassword)
     if (req.body.newPassword !== req.body.confirmPassword) {
         return next(new ErrorHandler("password does not match", 400))
     }
@@ -203,18 +203,18 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
     }
 
     if (req.body.avatar !== "") {
-        console.log("into the req.body.avatar")
+        // console.log("into the req.body.avatar")
         const user = await User.findById(req.user._id)
 
         const imageId = user.avatar.public_id
 
-        console.log('before destroy mycloud')
+        // console.log('before destroy mycloud')
 
-        console.log(imageId)
+        // console.log(imageId)
 
         await cloudinary.v2.uploader.destroy(imageId)
 
-        console.log('after destroy mycloud')
+        // console.log('after destroy mycloud')
 
         const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
             folder: 'avatars',
@@ -222,7 +222,7 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
             // crop: "scale"
         })
 
-        console.log('after mycloud')
+        // console.log('after mycloud')
 
         newUserData.avatar = {
             public_id: myCloud.public_id,
@@ -267,7 +267,7 @@ exports.getSingleUser = catchAsyncError(async (req, res, next) => {
 
 //update user role (admin)
 exports.updateUserRole = catchAsyncError(async (req, res, next) => {
-    console.log(req.body, "from userupdate")
+    // console.log(req.body, "from userupdate")
     const newUserData = {
         name: req.body.updateUser.name,
         email: req.body.updateUser.email,

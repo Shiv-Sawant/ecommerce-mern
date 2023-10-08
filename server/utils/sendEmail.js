@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer')
 
 const sendEmail = async (options) => {
-console.log("into the sendEmail")
+// console.log("into the sendEmail")
     // const transporter1 = nodemailer.createTransport({
     //     service: "gmail",
     //     auth: {
@@ -25,8 +25,8 @@ console.log("into the sendEmail")
         }
     })
 
-    console.log("after the transporter")
-    console.log(options,"optionsoptionsoptions")
+    // console.log("after the transporter")
+    // console.log(options,"optionsoptionsoptions")
 
     const mailOptions = {
         from: process.env.SMPT_MAIL,
@@ -35,7 +35,7 @@ console.log("into the sendEmail")
         text: options.message
     }
 
-    console.log("after the mail options")
+    // console.log("after the mail options")
 
 
     await transporter.sendMail(mailOptions)

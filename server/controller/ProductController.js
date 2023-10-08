@@ -16,7 +16,7 @@ exports.createProducts = catchAsyncError(async (req, res, next) => {
 
     const imageLinks = []
 
-    console.log(images.length, "imagesimages")
+    // console.log(images.length, "imagesimages")
 
     // for (let i = 0; i < images.length; i++) {
     //     const result = await cloudinary.v2.uploader.upload(images[i], {
@@ -69,7 +69,7 @@ exports.getAllAdminProducts = catchAsyncError(async (req, res, next) => {
 //get product details
 exports.getProductDetail = catchAsyncError(async (req, res, next) => {
     const product = await Product.findById(req.params.id)
-    console.log('into product detail route')
+    // console.log('into product detail route')
     if (!product) {
         return next(new ErrorHandler('Product Id Incorrect', 404))
     }
@@ -84,7 +84,7 @@ exports.getProductDetail = catchAsyncError(async (req, res, next) => {
 exports.updateProducts = catchAsyncError(async (req, res, next) => {
     let product = await Product.findById(req.params.id);
 
-    console.log(req.body) 
+    // console.log(req.body) 
     if (!product) {
         return next(new ErrorHandler('Product Id Incorrect', 404))
     }
@@ -196,9 +196,9 @@ exports.deleteReview = catchAsyncError(async (req, res, next) => {
 
     const numOfReview = reviews.length
 
-    console.log(ratings,"ratings")
-    console.log(reviews,"ratings")
     // console.log(ratings,"ratings")
+    // console.log(reviews,"ratings")
+    // // console.log(ratings,"ratings")
 
     await Product.findByIdAndUpdate(req.query.productId, {
         reviews, ratings, numOfReview

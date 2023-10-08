@@ -23,7 +23,7 @@ const Dashboard = () => {
     return state.app
   })
 
-  console.log(data,"dashboard")
+  // console.log(data,"dashboard")
   const alerts = useAlert()
   const dispatch = useDispatch()
 
@@ -35,7 +35,7 @@ const Dashboard = () => {
     }
   }
 
-  console.log(outOfStock,"outOfStock")
+  // console.log(outOfStock,"outOfStock")
 
 
   const lineState = {

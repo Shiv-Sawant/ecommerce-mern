@@ -12,7 +12,7 @@ const Orders = () => {
         return state.app
     })
 
-    console.log(data, "all orders    ")
+    // console.log(data, "all orders    ")
 
 
     const columns = [
@@ -34,7 +34,7 @@ const Orders = () => {
         })
     }
 
-    console.log(rows,"rowrow")
+    // console.log(rows,"rowrow")
 
     useEffect(() => {
         dispatch(getOrders())

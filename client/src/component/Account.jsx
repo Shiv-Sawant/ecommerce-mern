@@ -14,7 +14,7 @@ const Account = () => {
     return state.app
   })
 
-  console.log(data, "datadata")
+  // console.log(data, "datadata")
 
   useEffect(() => {
     if(data?.isAuthenticate === false) {

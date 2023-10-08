@@ -17,7 +17,7 @@ const AdminAllReviews = () => {
     return state.app
   })
 
-  console.log(data, "datadatadata")
+  // console.log(data, "datadatadata")
 
   const columns = [
     { field: "id", headerName: "Review ID", minWidth: 200, flex: 0.5 },
@@ -58,7 +58,7 @@ const AdminAllReviews = () => {
       type: "number",
       sortable: false,
       renderCell: (params) => {
-        console.log(params)
+        // console.log(params)
         return (
           <>
             <button
@@ -72,7 +72,7 @@ const AdminAllReviews = () => {
     },
   ];
   const handleDelete = (reviewId, productId) => {
-    console.log(reviewId, productId)
+    // console.log(reviewId, productId)
     dispatch(deleteReview({ productId: productId, id: reviewId }))
 
     if (data?.error != null) {

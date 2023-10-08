@@ -47,7 +47,9 @@ const Shipping = () => {
   }
 
   useEffect(() => {
-    dispatch(clearErrors())
+    if (data?.error != null) {
+      dispatch(clearErrors())
+    }
   }, [dispatch, PhoneNumber, alerts])
 
   return (

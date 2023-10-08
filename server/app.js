@@ -40,7 +40,7 @@ app.use('/api/v1', payment)
 
 //routes
 app.listen(process.env.PORT, () => {
-  console.log(`server is running in http://localhost:${process.env.PORT}`)
+  // console.log(`server is running in http://localhost:${process.env.PORT}`)
 })
 
 app.use(errorMiddleware)

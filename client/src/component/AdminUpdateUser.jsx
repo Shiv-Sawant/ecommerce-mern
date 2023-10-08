@@ -60,7 +60,7 @@ const AdminUpdateUser = () => {
 
     }, [dispatch, alerts, navigate, params.id, data])
 
-    console.log(updateUser, "updateUserupdateUserupdateUser")
+    // console.log(updateUser, "updateUserupdateUserupdateUser")
 
     return (
         <>

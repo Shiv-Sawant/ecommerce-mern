@@ -17,7 +17,7 @@ const AdminUsers = () => {
     return state.app
   })
 
-  console.log(data, "datadata")
+  // console.log(data, "datadata")
 
   useEffect(() => {
     dispatch(allUser())
@@ -89,7 +89,7 @@ const AdminUsers = () => {
   }
 
   const handleDelete = (id) => {
-    console.log(id, "id")
+    // console.log(id, "id")
     if (data?.error != null) {
       alerts.error(data?.error?.message)
       dispatch(clearErrors())

@@ -26,7 +26,7 @@ const AdminCreateProducts = () => {
     imageInput: null
   })
 
-  console.log(createProductInput, "createProductInputcreateProductInput")
+  // console.log(createProductInput, "createProductInputcreateProductInput")
 
   const data = useSelector((state) => {
     return state.app

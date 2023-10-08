@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { cartItems, removeCartItem } from '../featrues/productSlice'
+import { cartItems, clearErrors, removeCartItem } from '../featrues/productSlice'
 import { Link, useNavigate } from 'react-router-dom'
 import { BsCartX } from 'react-icons/bs'
 
@@ -12,10 +12,10 @@ const Cart = () => {
     })
 
     const handleIncrease = (id, stock, quantity) => {
-        console.log('into iecrease')
+        // console.log('into iecrease')
 
         if (quantity < stock) {
-            console.log('into if')
+            // console.log('into if')
 
             let newqty = quantity + 1
             dispatch(cartItems({
@@ -26,7 +26,7 @@ const Cart = () => {
     }
 
     const handleDecrease = (id, quantity) => {
-        console.log('into de')
+        // console.log('into de')
         if (quantity > 1) {
             let newQty = quantity - 1
             dispatch(cartItems({
@@ -43,6 +43,12 @@ const Cart = () => {
     const handleCheckout = () => {
         navigate("/login?redirect=shipping")
     }
+
+    useEffect(() => {
+        if (data?.error != null) {
+            dispatch(clearErrors())
+        }
+    }, [dispatch])
 
 
     return (

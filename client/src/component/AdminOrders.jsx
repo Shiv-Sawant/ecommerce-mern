@@ -62,7 +62,7 @@ const AdminOrders = () => {
       type: "number",
       sortable: false,
       renderCell: (params) => {
-        console.log(params, "paramsparams")
+        // console.log(params, "paramsparams")
         return (
           <>
             <Link to={`/admin/order/${params.row.id}`}>
@@ -93,7 +93,7 @@ const AdminOrders = () => {
     })
   }
 
-  console.log(rows, "rows")
+  // console.log(rows, "rows")
   useEffect(() => {
     dispatch(getAllOrders())
   }, [dispatch,deleteOrder])
