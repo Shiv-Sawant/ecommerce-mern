@@ -18,7 +18,7 @@ const ProceedPayment = () => {
   const dispatch = useDispatch()
   const alerts = useAlert()
   const stripe = useStripe()
-  const elements = useElements()
+  const ele = useElements()
   const payBtn = useRef(null)
   const navigate = useNavigate()
 
@@ -49,13 +49,13 @@ const ProceedPayment = () => {
 
       const client_secret = data.data.clientSecret
 
-      if (!stripe || !elements) {
+      if (!stripe || !ele) {
         return;
       }
 
       const result = await stripe.confirmCardPayment(client_secret, {
         payment_method: {
-          card: elements.getElement(CardNumberElement),
+          card: ele.getElement(CardNumberElement),
           billing_details: {
             name: data?.userInfo?.data?.user?.name,
             email: data?.userInfo?.data?.user?.email,

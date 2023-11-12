@@ -36,27 +36,31 @@ import { useAlert } from 'react-alert';
 import ProtectedRoute from './route/ProtectedRoute';
 import StripeProcessPayment from './component/StripeProcessPayment';
 
+const stripePromise = loadStripe('pk_test_51NsTSESA97L9ozy2QgqGl3zoVMU5gtNIxsySW5rUZvcc4Cy45cNe2pW6T27rXxBmyGR9MLrwcXpeeXjphsxeIXSh00oDRKeXAm');
 
 function App() {
   const alerts = useAlert()
   var user = useSelector((state) => state.app)
   const [StripeKey, setStripeKey] = useState()
-  const stripeKey = "pk_test_51NsTSESA97L9ozy2QgqGl3zoVMU5gtNIxsySW5rUZvcc4Cy45cNe2pW6T27rXxBmyGR9MLrwcXpeeXjphsxeIXSh00oDRKeXAm"
-  const stripeLoader = loadStripe(stripeKey)
+  const CLIENT_SECRET='sk_test_51NsTSESA97L9ozy2ZdtRvp8Jeo6aOYtuwgh9QdaGHeRSy61qRja4axby8P01pMUSUfsultiOhrRye7QVDOM5Cw2W00oRQKqBsP'
+  const options = {
+    // passing the client secret obtained from the server
+    clientSecret: '{{sk_test_51NsTSESA97L9ozy2ZdtRvp8Jeo6aOYtuwgh9QdaGHeRSy61qRja4axby8P01pMUSUfsultiOhrRye7QVDOM5Cw2W00oRQKqBsP}}',
+  };
 
 
-  async function getStripeKey() {
-    console.log('into the get stripe key')
-    const data = await axios.get('http://localhost:3500/api/v1/sendApiKey',
-      { withCredentials: true },
-      {
-        headers:
-          { "Content-Type": "application/json" }
-      }
-    )
-    setStripeKey(data.data.stripapikey)
+  // async function getStripeKey() {
+  //   console.log('into the get stripe key')
+  //   const data = await axios.get('http://localhost:3500/api/v1/sendApiKey',
+  //     { withCredentials: true },
+  //     {
+  //       headers:
+  //         { "Content-Type": "application/json" }
+  //     }
+  //   )
+  //   setStripeKey(data.data.stripapikey)
 
-  }
+  // }
 
   useEffect(() => {
     webfont.load({
@@ -73,9 +77,8 @@ function App() {
     store.dispatch(userAccountInfo())
     // getStripeKey()
 
-  }, [StripeKey])
+  }, [])
 
-  console.log(StripeKey, "StripeKeyStripeKey")
 
   return (
 
@@ -84,15 +87,13 @@ function App() {
         <Header />
         {user?.isAuthenticate && <UserOptions user={user} />}
 
-        {user?.isAuthenticate ? StripeKey && (
-          // <Elements stripe={stripeLoader}>
+        {/* {StripeKey && ( */}
+          <Elements stripe={loadStripe('pk_test_51NsTSESA97L9ozy2QgqGl3zoVMU5gtNIxsySW5rUZvcc4Cy45cNe2pW6T27rXxBmyGR9MLrwcXpeeXjphsxeIXSh00oDRKeXAm')}>
             <Routes>
-              <Route path='/process/payment' element={<StripeProcessPayment />} />
+            <Route path='/process/payment' element={<ProceedPayment />} />
             </Routes>
-          // </Elements>
-        )
-          :
-          null}
+          </Elements>
+        {/* )} */}
 
         <Routes>
           <Route path='/' element={<Home />} />

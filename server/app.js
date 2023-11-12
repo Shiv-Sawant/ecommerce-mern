@@ -19,7 +19,7 @@ app.use(fileUpload())
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3001",
     credentials: true
   })
 );
@@ -40,7 +40,7 @@ app.use('/api/v1', payment)
 
 //routes
 app.listen(process.env.PORT, () => {
-  // console.log(`server is running in http://localhost:${process.env.PORT}`)
+  console.log(`server is running in http://localhost:${process.env.PORT}`)
 })
 
 app.use(errorMiddleware)

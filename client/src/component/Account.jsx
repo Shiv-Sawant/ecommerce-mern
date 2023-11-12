@@ -57,7 +57,7 @@ const Account = () => {
               </div>
               <div className='account-button'>
                 <div>
-                  <Link to="/orders">
+                  <Link to="/order/me">
                     <button>My Orders</button>
                   </Link>
                 </div>

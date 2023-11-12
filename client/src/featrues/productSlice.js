@@ -595,6 +595,7 @@ export const productSlice = createSlice({
         [getProductReview.fulfilled]: (state, action) => {
             state.loading = false
             state.allReviews = action.payload
+            state.error = null
         },
         [getProductReview.rejected]: (state, action) => {
             state.loading = false

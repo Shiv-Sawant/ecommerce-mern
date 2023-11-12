@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { cartItems, clearErrors, createProductReview, getProductReview, productDetail } from '../featrues/productSlice'
-import { useParams } from 'react-router-dom'
+import { useParams,useNavigate } from 'react-router-dom'
 import Carousel from 'react-material-ui-carousel'
 import ReviewCard from './ReviewCard'
 import Loader from './Loader'
@@ -23,12 +23,14 @@ const ProductDetail = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [Reviews, setReview] = useState([])
   const [Ratings, setRating] = useState([])
-
+const navigate = useNavigate()
   const productDetails = useSelector((state) => {
     return state.app
   })
 
-  // console.log(productDetails, "productDetailsproductDetails")
+
+
+  console.log(productDetails, "productDetailsproductDetails")
 
   const handleIncrease = () => {
     if (Number(productDetails?.productDetails?.data?.product?.Stock) !== item) {
@@ -49,8 +51,6 @@ const ProductDetail = () => {
       product: params.id,
       item
     }))
-
-
   }
 
   const handleSubmitOpen = () => {
@@ -58,12 +58,16 @@ const ProductDetail = () => {
   }
 
   const handleReviewSubmit = () => {
-    dispatch(createProductReview({
-      rating: Ratings,
-      comment: Reviews,
-      productId: params.id
-    }))
-
+    if(productDetails.isAuthenticate) {
+      dispatch(createProductReview({
+        rating: Ratings,
+        comment: Reviews,
+        productId: params.id
+      }))
+    } else {
+      navigate('/login')
+    }
+  
     setIsOpen(!isOpen)
   }
 
@@ -84,7 +88,8 @@ const ProductDetail = () => {
 
     dispatch(productDetail(params.id))
 
-    dispatch(getProductReview(params.id))
+
+    // dispatch(getProductReview(params.id))
 
     if (productDetails?.newReview?.data?.success) {
       alerts.success('Review Send Successfully  ')
