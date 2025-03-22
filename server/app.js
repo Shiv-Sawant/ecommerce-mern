@@ -3,12 +3,12 @@ const cors = require('cors')
 const errorMiddleware = require('./middleware/error')
 const fileUpload = require('express-fileupload')
 const dotenv = require('dotenv')
+dotenv.config()
 const dbConnection = require('./config/mongoDbConnection')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 var app = express()
 
-dotenv.config({ path: "server/config/config.env" })
 dbConnection()
 
 // app.use(express.json())
@@ -19,7 +19,7 @@ app.use(fileUpload())
 
 app.use(
   cors({
-    origin: "http://localhost:3001",
+    origin: "http://localhost:3000",
     credentials: true
   })
 );
